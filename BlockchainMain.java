@@ -17,7 +17,7 @@ public class BlockchainMain {
             transactions.add(tran1);
         }
 
-        Transaction tran2 = A.send(B.publicKey, 20);
+        Transaction tran2 = A.send(B.publicKey, 20); // change 20 to 200 to test transaction rejection
         if(tran2 != null) {
             transactions.add(tran2);
         }
