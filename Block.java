@@ -22,9 +22,10 @@ public class Block {
 
     public String calculateHash(){
         try{
+            data = "";
             for(int i = 0; i < transactions.size(); i++){
                 Transaction tr = transactions.get(i);
-                data += tr.sender + tr.recipient + tr.value;
+                data = data + tr.sender + tr.recipient + tr.value;
             }
 
             String input = index + timestamp + prevHash + data + nonce;
