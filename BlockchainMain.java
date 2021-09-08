@@ -2,24 +2,32 @@ import java.util.*;
 
 public class BlockchainMain {
     public static ArrayList<Block> blockchain = new ArrayList<>();
+    public static ArrayList<Transaction> transactions = new ArrayList<>();
     public static int difficulty = 5;
 
     public static void main(String args[]){
-        Block b = new Block(0, null, "My first block"); // Genesis block
+        // Block b = new Block(0, null, "My first block"); // Genesis block
 
-        b.mineBlock(difficulty);
-        blockchain.add(b);
-        System.out.println(b.toString());
-        System.out.println("Current block valid: " + validateBlock(b, null));
+        // b.mineBlock(difficulty);
+        // blockchain.add(b);
+        // System.out.println(b.toString());
+        // System.out.println("Current block valid: " + validateBlock(b, null));
 
-        Block b2 = new Block(1, b.curHash, "My second block");
-        b2.mineBlock(difficulty);
-        blockchain.add(b2);
-        //b2.data = "My third block"; // test validation by changing data attribute after block has already been generated
-        System.out.println(b2.toString());
-        System.out.println("Current block valid: " + validateBlock(b2, b));
+        // Block b2 = new Block(1, b.curHash, "My second block");
+        // b2.mineBlock(difficulty);
+        // blockchain.add(b2);
+        // //b2.data = "My third block"; // test validation by changing data attribute after block has already been generated
+        // System.out.println(b2.toString());
+        // System.out.println("Current block valid: " + validateBlock(b2, b));
 
-        System.out.println("\nCurrent chain valid: " + validateChain(blockchain));
+        // System.out.println("\nCurrent chain valid: " + validateChain(blockchain));
+
+        // System.out.println("\n----------------------------------------------------\n");
+
+        Wallet A = new Wallet(blockchain);
+        Wallet B = new Wallet(blockchain);
+        System.out.println("Wallet A Balance: " + A.getBalance());
+        System.out.println("Wallet B Balance: " + B.getBalance());
     }
 
     public static boolean validateBlock(Block newBlock, Block prevBlock){

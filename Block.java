@@ -8,19 +8,25 @@ public class Block {
     public String curHash;
     public String prevHash;
     public String data;
+    public ArrayList<Transaction> transactions = new ArrayList<>();
     public int nonce;
 
-    public Block(int index, String prevHash, String data){
+    public Block(int index, String prevHash, ArrayList<Transaction> transactions){
         this.index = index;
         this.timestamp = System.currentTimeMillis();
         this.prevHash = prevHash;
-        this.data = data;
+        this.transactions = transactions;
         nonce = 0;
         curHash = calculateHash();
     }
 
     public String calculateHash(){
         try{
+            for(int i = 0; i < transactions.size(); i++){
+                Transaction tr = transactions.get(i);
+                data += tr.sender + tr.recipient + tr.value;
+            }
+
             String input = index + timestamp + prevHash + data + nonce;
 
             MessageDigest msgDigest = MessageDigest.getInstance("SHA-256");
@@ -54,7 +60,7 @@ public class Block {
         String s = "Block # : " + index + "\r\n";
         s += "Previous Hash: " + prevHash + "\r\n";
         s += "Timestamp: " + timestamp + "\r\n";
-        s += "Data: " + data + "\r\n";
+        s += "Transactions: " + data + "\r\n";
         s += "Nonce: " + nonce + "\r\n";
         s += "Current Hash: " + curHash + "\r\n";
 
