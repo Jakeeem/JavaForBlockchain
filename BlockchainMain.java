@@ -18,6 +18,8 @@ public class BlockchainMain {
         //b2.data = "My third block"; // test validation by changing data attribute after block has already been generated
         System.out.println(b2.toString());
         System.out.println("Current block valid: " + validateBlock(b2, b));
+
+        System.out.println("\nCurrent chain valid: " + validateChain(blockchain));
     }
 
     public static boolean validateBlock(Block newBlock, Block prevBlock){
@@ -65,5 +67,22 @@ public class BlockchainMain {
         }
 
         
+    }
+
+    public static boolean validateChain(ArrayList<Block> blockchain){
+        if (!validateBlock((blockchain.get(0)), null)){ // check if genesis block is valid
+            return false;
+        }
+
+        for(int i = 1; i < blockchain.size(); i++){
+            Block currentBlock = blockchain.get(i);
+            Block previousBlock = blockchain.get(i - 1);
+
+            if (!validateBlock(currentBlock, previousBlock)){
+                return false;
+            }
+        }
+
+        return true;
     }
 }
